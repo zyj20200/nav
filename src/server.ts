@@ -13,6 +13,11 @@ const authTokens = new Set<string>();
 app.use(cors());
 app.use(bodyParser.json());
 
+// Serve admin page at /admin
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, '../html/admin.html'));
+});
+
 // Serve static files from the 'html' directory
 app.use(express.static(path.join(__dirname, '../html')));
 
