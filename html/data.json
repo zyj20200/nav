@@ -1,0 +1,222 @@
+{
+  "left": [
+    {
+      "category": "AI",
+      "links": [
+        { "name": "Chatgpt", "url": "https://chatgpt.com/" },
+        { "name": "claude", "url": "https://claude.ai/chat" },
+        { "name": "Perplexity", "url": "https://www.perplexity.ai/" },
+        { "name": "grok", "url": "https://grok.com/" }
+      ]
+    },
+    {
+      "category": "国产AI",
+      "links": [
+        { "name": "gemini", "url": "https://gemini.google.com/app" },
+        { "name": "aistudio", "url": "https://aistudio.google.com/prompts/new_chat" },
+        { "name": "v0.dev", "url": "https://v0.dev/" },
+        { "name": "deepseek", "url": "https://chat.deepseek.com/" }
+      ]
+    },
+    {
+      "category": "LLM",
+      "links": [
+        { "name": "huggingface", "url": "https://huggingface.co/" },
+        { "name": "modelscope", "url": "https://www.modelscope.cn/models" },
+        { "name": "ollama", "url": "https://ollama.com/library" },
+        { "name": "vllm", "url": "https://docs.vllm.ai/en/stable/" }
+      ]
+    },
+    {
+      "category": "社区",
+      "links": [
+        { "name": "HostLOC", "url": "https://hostloc.com/forum-45-1.html?d=1" },
+        { "name": "NodeSeek", "url": "https://www.nodeseek.com" },
+        { "name": "LinuxDo", "url": "https://linux.do/" },
+        { "name": "妖火", "url": "https://yaohuo.me/wapindex.aspx?sid=-2" }
+      ]
+    },
+    {
+      "category": "工具",
+      "links": [
+        { "name": "tokenizer", "url": "https://platform.openai.com/tokenizer" },
+        { "name": "短链", "url": "https://short.06150018.xyz/" },
+        { "name": "记事本", "url": "https://notebook.06150018.xyz/" },
+        { "name": "探针", "url": "https://ss.22483523.xyz/" }
+      ]
+    },
+    {
+      "category": "工具",
+      "links": [
+        { "name": "Json格式化", "url": "https://www.jsont.run/" },
+        { "name": "Json压缩", "url": "https://coding.tools/cn/json-minifier" },
+        { "name": "换行符转换", "url": "https://uutool.cn/txt-ln/" },
+        { "name": "文本比对1", "url": "https://diffsuite.com/" }
+      ]
+    },
+    {
+      "category": "工具",
+      "links": [
+        { "name": "it-tools", "url": "https://it-tools.tech/" },
+        { "name": "代码混淆", "url": "https://pyob.oxyry.com/" },
+        { "name": "图床", "url": "https://yaohuo.me/tuchuang/" },
+        { "name": "网站测速", "url": "https://17ce.com/" }
+      ]
+    },
+    {
+      "category": "资源",
+      "links": [
+        { "name": "jetbrain", "url": "https://3.jetbra.in/" },
+        { "name": "115资源", "url": "https://link3.cc/xiaoditx" },
+        { "name": "聚合音乐", "url": "https://suntl.com/other/music" },
+        { "name": "音乐下载", "url": "https://suntl.com/other/musicss" }
+      ]
+    },
+    {
+      "category": "邮箱",
+      "links": [
+        { "name": "网易邮箱", "url": "https://mail.163.com" },
+        { "name": "腾讯企业", "url": "https://exmail.qq.com" },
+        { "name": "Gmail", "url": "https://mail.google.com" },
+        { "name": "Outlook", "url": "https://outlook.live.com" }
+      ]
+    },
+    {
+      "category": "新闻",
+      "links": [
+        { "name": "今日头条", "url": "https://www.toutiao.com" },
+        { "name": "环球时报", "url": "https://www.huanqiu.com" },
+        { "name": "网易新闻", "url": "https://news.163.com" },
+        { "name": "MAKE资讯", "url": "https://make.mk" }
+      ]
+    },
+    {
+      "category": "翻译",
+      "links": [
+        { "name": "百度翻译", "url": "https://fanyi.baidu.com" },
+        { "name": "谷歌翻译", "url": "https://translate.google.com/" },
+        { "name": "必应翻译", "url": "https://cn.bing.com/translator/" },
+        { "name": "有道翻译", "url": "http://fanyi.youdao.com" }
+      ]
+    },
+    {
+      "category": "图片",
+      "links": [
+        { "name": "图片拼接", "url": "https://img.ops-coffee.cn/photo/" },
+        { "name": "Pexels", "url": "https://www.pexels.com" },
+        { "name": "Images", "url": "https://cn.freeimages.com" },
+        { "name": "Pixabay", "url": "https://pixabay.com/zh" }
+      ]
+    }
+  ],
+  "right": [
+    {
+      "category": "LLM",
+      "links": [
+        { "name": "siliconflow", "url": "https://cloud.siliconflow.cn/playground/chat" },
+        { "name": "monica", "url": "https://monica.im/zh_CN/home" },
+        { "name": "iask", "url": "https://iask.ai/?mode=pro" },
+        { "name": "v0.dev", "url": "https://v0.dev/" }
+      ]
+    },
+    {
+      "category": "国产AI",
+      "links": [
+        { "name": "豆包", "url": "https://www.doubao.com/chat/" },
+        { "name": "monica.cn", "url": "https://monica.cn/home" },
+        { "name": "讯飞星火", "url": "https://xinghuo.xfyun.cn/desk" },
+        { "name": "讯飞智文", "url": "https://zhiwen.xfyun.cn/home" }
+      ]
+    },
+    {
+      "category": "网盘",
+      "links": [
+        { "name": "115", "url": "https://115.com/" },
+        { "name": "夸克", "url": "https://pan.quark.cn/#/list/all" },
+        { "name": "123pan", "url": "https://www.123pan.com/" },
+        { "name": "蓝奏", "url": "https://pc.woozooo.com/" }
+      ]
+    },
+    {
+      "category": "网盘",
+      "links": [
+        { "name": "坚果云", "url": "https://www.jianguoyun.com/d/home#/" },
+        { "name": "百度云盘", "url": "https://pan.baidu.com/" },
+        { "name": "阿里云盘", "url": "https://www.aliyundrive.com" },
+        { "name": "天翼云盘", "url": "https://cloud.189.cn/" }
+      ]
+    },
+    {
+      "category": "常用",
+      "links": [
+        { "name": "alist", "url": "https://alist.nn.ci/zh/guide/" },
+        { "name": "itdog", "url": "https://www.itdog.cn/tcping/" },
+        { "name": "IP138", "url": "https://www.ip138.com" },
+        { "name": "AWS-IP", "url": "https://ec2-reachability.amazonaws.com" }
+      ]
+    },
+    {
+      "category": "工具",
+      "links": [
+        { "name": "excalidraw", "url": "https://excalidraw.com/" },
+        { "name": "draw.io", "url": "https://app.diagrams.net/" },
+        { "name": "v2ex", "url": "https://v2ex.com/" },
+        { "name": "新浪微博", "url": "https://weibo.com" }
+      ]
+    },
+    {
+      "category": "影视",
+      "links": [
+        { "name": "爱奇艺", "url": "http://www.iqiyi.com" },
+        { "name": "腾讯视频", "url": "https://v.qq.com" },
+        { "name": "哔哩哔哩", "url": "https://www.bilibili.com/" },
+        { "name": "斗鱼直播", "url": "https://www.douyu.com" }
+      ]
+    },
+    {
+      "category": "图床",
+      "links": [
+        { "name": "imgdd", "url": "https://imgdd.com/" },
+        { "name": "不错图床", "url": "https://img.buo.us.kg/" },
+        { "name": "pixhost", "url": "https://pixhost.to" },
+        { "name": "unlil", "url": "https://img.unlil.com/" }
+      ]
+    },
+    {
+      "category": "文档",
+      "links": [
+        { "name": "siliconflow", "url": "https://docs.siliconflow.cn/introduction" },
+        { "name": "ollama", "url": "https://github.com/ollama/ollama/tree/main/docs" },
+        { "name": "vllm", "url": "https://docs.vllm.ai/en/stable/" },
+        { "name": "openai", "url": "https://platform.openai.com/docs/overview" }
+      ]
+    },
+    {
+      "category": "博客",
+      "links": [
+        { "name": "laoda", "url": "https://blog.laoda.de/" },
+        { "name": "汇尘轩", "url": "https://kirigaya.cn/home" },
+        { "name": "如有乐享", "url": "https://51.ruyo.net/" },
+        { "name": "磁力搜索", "url": "https://cilisousuo.co" }
+      ]
+    },
+    {
+      "category": "设计",
+      "links": [
+        { "name": "创可贴", "url": "https://www.chuangkit.com" },
+        { "name": "Fotor", "url": "https://www.fotor.com.cn" },
+        { "name": "墨刀", "url": "https://modao.cc" },
+        { "name": "阿里图标", "url": "https://www.iconfont.cn" }
+      ]
+    },
+    {
+      "category": "其它",
+      "links": [
+        { "name": "二维码", "url": "https://cli.im" },
+        { "name": "毒鸡汤", "url": "https://suntl.com/other/jitang" },
+        { "name": "软件下载", "url": "https://lrepacks.net" },
+        { "name": "随机密码", "url": "https://suntl.com/other/sjmm" }
+      ]
+    }
+  ]
+}

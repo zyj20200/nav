@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon1.png">
+    <link rel="stylesheet" href="css/semantic.min.css">
+    <link rel="stylesheet" href="css/m_dh.style.css">
+    <title>X导航</title>
+    <meta name="description" content="咖啡导航,聚合搜索,导航网站">
+    <script src="js/jquery.min.js"></script>
+    <style>
+        /* 添加媒体查询以适应移动设备 */
+        @media (max-width: 768px) {
+            .ui.menu .item {
+                font-size: 14px;
+                padding: 8px;
+            }
+            .ui.input input {
+                font-size: 14px;
+            }
+            .ui.button {
+                padding: 8px;
+                font-size: 14px;
+            }
+            .ui.two.column.grid {
+                padding: 0 10px;
+            }
+            .ui.table td {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body id="killie">
+    <div class="ui inverted menu borderless">
+        <div class="ui container">
+            <!-- /<span class="header item"><a href="https://sg.arm01.panel.920325.xyz/" target="">Panel</a></span>  -->
+            <span class="header item"><a href="https://sub.06150018.xyz/" target="">Sublink</a></span> 
+            <span class="header item"><a href="https://ss-hw-hk.22483523.xyz/" target="">探针</a></span>
+            <span class="header item"><a href="https://blinko-hw.06150018.xyz/" target="">blinko</a></span>
+            <span class="header item"><a href="https://sg.arm01.ollama.920325.xyz/" target="">chat</a></span>
+            <span class="header item"><a href="https://share.hw.06150018.xyz/" target="">share</a></span>
+            <span class="header item"><a href="https://notebook.06150018.xyz/" target="">记事本</a></span> 
+            <span class="header item"><a href="https://json.hw.06150018.xyz/" target="">json</a></span> 
+            <span class="header item"><a href="https://hw.vocechat.06150018.xyz/" target="">vocechat</a></span> 
+            <span class="header item"><a href="https://hw.alist.06150018.xyz/" target="">alist</a></span> 
+            <!-- <span class="header item"><a href="https://hw.siyuan.06150018.xyz/" target="">siyuan</a></span>  -->
+            <!-- <span class="header item"><a href="https://hw.vaultwarden.06150018.xyz/" target="">vaultwarden</a></span>  -->
+            <a class="ui item right floated" href="chrome://history/" target=""><b>history</b></a>
+        </div>
+    </div>
+    <div class="ui main container">
+        <div class="ui search">
+            <div class="ui input">
+                <input id="search" name="wd" class="prompt" placeholder="" type="text" autofocus="autofocus">
+            </div>
+        </div>
+        <div class="ui sbuttons">
+            <button class="ui button" id="baidu">百度</button> 
+            <button class="ui button" id="google">谷歌</button> 
+            <button class="ui button" id="bing">必应</button> 
+            <button class="ui button" id="zhihu">知乎</button> 
+            <button class="ui button" id="fanyi">翻译</button> 
+            <button class="ui button" id="github">GitHub</button> 
+            <button class="ui button" id="bilibili">bilibili</button> 
+            <button class="ui button" id="youtube">YouTube</button>
+        </div>
+        <div class="ui two column grid stables">
+            <div class="column" id="left-column"></div>
+            <div class="column" id="right-column"></div>
+        </div>
+    </div>
+    <div id="donate"></div>
+    <script src="js/search.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 动态加载导航数据
+            $.getJSON("/api/data", function(data) {
+                function renderColumn(items, containerId) {
+                    var html = '<table class="ui definition small table">';
+                    $.each(items, function(index, item) {
+                        html += '<tbody><tr>';
+                        html += '<td>' + item.category + '</td>';
+                        $.each(item.links, function(i, link) {
+                            html += '<td><a href="' + link.url + '" target="_blank">' + link.name + '</a></td>';
+                        });
+                        html += '</tr></tbody>';
+                    });
+                    html += '</table>';
+                    $(containerId).html(html);
+                }
+
+                if (data.left) {
+                    renderColumn(data.left, '#left-column');
+                }
+                if (data.right) {
+                    renderColumn(data.right, '#right-column');
+                }
+            });
+
+            $("#goDonate").click(function() {
+                $(".ui.modal").modal("show")
+            })
+        });
+        
+        var donateDiv = document.getElementById("donate");
+        if(donateDiv) {
+            donateDiv.innerHTML = '<div class="ui basic small modal "><div class="content"><div class="ui two cards"><div class=" card"> <div class="image"><img src="img/alipay.png"></div><div class="content "><div class="center aligned header ">Alipay</div></div></div><div class="card"><div class="image"><img src="img/wechatpay.png"></div><div class="content"><a class="center aligned header" >WeChatPay</a></div></div></div></div><div class="actions"><div class="ui red basic cancel inverted button">Back</div></div></div>';
+        }
+    </script>
+    <script src="js/checkIE.js"></script>
+    <script src="js/superplaceholder.js"></script>
+    <script src="js/checkOs.js"></script>
+</body>
+</html>

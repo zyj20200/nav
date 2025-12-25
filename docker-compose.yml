@@ -1,0 +1,10 @@
+version: '3'
+services:
+  nav-server:
+    build: .
+    container_name: nav-server
+    ports:
+      - "880:80"
+    volumes:
+      - ./html/data.json:/app/html/data.json
+    restart: always

@@ -1,0 +1,1 @@
+docker run -d -p 880:80 --name nav-nginx -v $PWD/html:/usr/share/nginx/html -v $PWD/nginx/conf.d:/etc/nginx/conf.d -v $PWD/nginx/nginx.conf:/etc/nginx/nginx.conf -v $PWD/nginx/logs:/var/log/nginx  nginx

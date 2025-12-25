@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航管理后台</title>
+    <link rel="stylesheet" href="css/semantic.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <style>
+        body { padding: 20px; }
+        .category-section { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
+        .link-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .link-item input { flex: 1; }
+    </style>
+</head>
+<body>
+    <div class="ui container">
+        <h1 class="ui header">导航管理后台</h1>
+        <div class="ui top attached tabular menu">
+            <a class="item active" data-tab="left">左侧栏</a>
+            <a class="item" data-tab="right">右侧栏</a>
+        </div>
+        <div class="ui bottom attached tab segment active" data-tab="left" id="left-container"></div>
+        <div class="ui bottom attached tab segment" data-tab="right" id="right-container"></div>
+
+        <div class="ui divider"></div>
+        <button class="ui primary button" id="save-btn">保存修改</button>
+        <a href="/" class="ui button">返回首页</a>
+    </div>
+
+    <script>
+        let navData = { left: [], right: [] };
+
+        $(document).ready(function() {
+            $('.menu .item').tab();
+            loadData();
+
+            $('#save-btn').click(saveData);
+        });
+
+        function loadData() {
+            $.getJSON('/api/data', function(data) {
+                navData = data;
+                renderColumn('left', data.left);
+                renderColumn('right', data.right);
+            });
+        }
+
+        function renderColumn(side, items) {
+            const container = $(`#${side}-container`);
+            container.empty();
+
+            items.forEach((category, catIndex) => {
+                const catHtml = `
+                    <div class="category-section" data-side="${side}" data-index="${catIndex}">
+                        <div class="ui form">
+                            <div class="field">
+                                <label>分类名称</label>
+                                <div class="ui action input">
+                                    <input type="text" class="cat-name" value="${category.category}">
+                                    <button class="ui red icon button delete-cat-btn"><i class="trash icon"></i></button>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>链接列表</label>
+                                <div class="links-container"></div>
+                                <button class="ui mini button add-link-btn"><i class="plus icon"></i> 添加链接</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const $cat = $(catHtml);
+                const $linksContainer = $cat.find('.links-container');
+
+                category.links.forEach((link, linkIndex) => {
+                    const linkHtml = `
+                        <div class="link-item">
+                            <div class="ui input"><input type="text" class="link-name" placeholder="名称" value="${link.name}"></div>
+                            <div class="ui input"><input type="text" class="link-url" placeholder="URL" value="${link.url}"></div>
+                            <button class="ui icon button red basic delete-link-btn"><i class="minus icon"></i></button>
+                        </div>
+                    `;
+                    $linksContainer.append(linkHtml);
+                });
+
+                container.append($cat);
+            });
+
+            container.append(`<button class="ui button green add-cat-btn" data-side="${side}"><i class="plus icon"></i> 添加分类</button>`);
+            
+            bindEvents(container);
+        }
+
+        function bindEvents(container) {
+            container.find('.delete-cat-btn').click(function() {
+                if(confirm('确定删除该分类吗？')) {
+                    $(this).closest('.category-section').remove();
+                }
+            });
+
+            container.find('.add-link-btn').click(function() {
+                const linkHtml = `
+                    <div class="link-item">
+                        <div class="ui input"><input type="text" class="link-name" placeholder="名称"></div>
+                        <div class="ui input"><input type="text" class="link-url" placeholder="URL"></div>
+                        <button class="ui icon button red basic delete-link-btn"><i class="minus icon"></i></button>
+                    </div>
+                `;
+                $(this).prev('.links-container').append(linkHtml);
+            });
+
+            container.on('click', '.delete-link-btn', function() {
+                $(this).closest('.link-item').remove();
+            });
+
+            container.find('.add-cat-btn').click(function() {
+                const side = $(this).data('side');
+                // Re-render with a new empty category
+                const currentData = collectData();
+                currentData[side].push({ category: "新分类", links: [] });
+                navData = currentData;
+                renderColumn('left', navData.left);
+                renderColumn('right', navData.right);
+            });
+        }
+
+        function collectData() {
+            const newData = { left: [], right: [] };
+            
+            ['left', 'right'].forEach(side => {
+                $(`#${side}-container .category-section`).each(function() {
+                    const catName = $(this).find('.cat-name').val();
+                    const links = [];
+                    $(this).find('.link-item').each(function() {
+                        const name = $(this).find('.link-name').val();
+                        const url = $(this).find('.link-url').val();
+                        if (name && url) {
+                            links.push({ name, url });
+                        }
+                    });
+                    newData[side].push({ category: catName, links });
+                });
+            });
+            return newData;
+        }
+
+        function saveData() {
+            const newData = collectData();
+            $.ajax({
+                url: '/api/data',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(newData),
+                success: function() {
+                    alert('保存成功！');
+                    navData = newData;
+                },
+                error: function() {
+                    alert('保存失败！');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
