@@ -5,6 +5,8 @@ services:
     container_name: nav-server
     ports:
       - "880:80"
+    environment:
+      - ADMIN_PASSWORD=admin123
     volumes:
       - ./html/data.json:/app/html/data.json
     restart: always
