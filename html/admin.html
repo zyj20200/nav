@@ -9,27 +9,155 @@
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <style>
-        body { padding: 20px; }
-        .category-section { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
-        .link-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
-        .link-item input { flex: 1; }
-        .link-item .handle { cursor: move; color: #aaa; margin-right: 5px; }
-        .link-item .handle:hover { color: #333; }
+        body { background-color: #f7f9fc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .main-container { margin-top: 80px; max-width: 1000px !important; }
+        .ui.menu.fixed { box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: none; }
+        .ui.menu .item.header { font-size: 1.2em; font-weight: 600; color: #333; }
+        
+        .category-section { 
+            background: white; 
+            margin-bottom: 25px; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+            border: 1px solid #eee;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .category-section:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .category-header label {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #555;
+            margin-right: 10px;
+        }
+
+        .link-item { 
+            display: flex; 
+            gap: 12px; 
+            margin-bottom: 12px; 
+            align-items: center; 
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        .link-item:hover {
+            background: white;
+            border-color: #e0e0e0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .link-item input { flex: 1; border: 1px solid #ddd !important; border-radius: 6px !important; }
+        .link-item input:focus { border-color: #2185d0 !important; }
+        
+        .link-item .handle { 
+            cursor: grab; 
+            color: #bbb; 
+            padding: 5px;
+            transition: color 0.2s;
+        }
+        .link-item .handle:hover { color: #666; }
+        .link-item .handle:active { cursor: grabbing; }
+
+        .ui.tabular.menu { border-bottom: none; margin-bottom: 20px; }
+        .ui.tabular.menu .item { 
+            border: none; 
+            background: transparent; 
+            color: #666; 
+            font-weight: 500;
+            padding: 12px 20px;
+            border-radius: 8px !important;
+            margin-right: 5px;
+        }
+        .ui.tabular.menu .item.active { 
+            background: white; 
+            color: #2185d0; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .ui.tab.segment { 
+            border: none; 
+            box-shadow: none; 
+            background: transparent; 
+            padding: 0; 
+            margin: 0;
+        }
+
+        .action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .add-cat-btn-container {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 100px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #888;
+        }
+        .add-cat-btn-container:hover {
+            border-color: #2185d0;
+            color: #2185d0;
+            background: #f0f8ff;
+        }
     </style>
 </head>
 <body>
-    <div class="ui container" id="main-content" style="display: none;">
-        <h1 class="ui header">导航管理后台</h1>
-        <div class="ui top attached tabular menu">
-            <a class="item active" data-tab="left">左侧栏</a>
-            <a class="item" data-tab="right">右侧栏</a>
+    <!-- Top Navbar -->
+    <div class="ui fixed menu">
+        <div class="ui container">
+            <div class="header item">
+                <i class="compass outline icon" style="margin-right: 10px; font-size: 1.4em; color: #2185d0;"></i>
+                导航管理后台
+            </div>
+            <div class="right menu">
+                <a href="/" class="item" target="_blank">
+                    <i class="external alternate icon"></i> 预览首页
+                </a>
+                <a href="javascript:void(0)" class="item" onclick="logout()">
+                    <i class="sign out alternate icon"></i> 退出
+                </a>
+            </div>
         </div>
-        <div class="ui bottom attached tab segment active" data-tab="left" id="left-container"></div>
-        <div class="ui bottom attached tab segment" data-tab="right" id="right-container"></div>
+    </div>
 
-        <div class="ui divider"></div>
-        <button class="ui primary button" id="save-btn">保存修改</button>
-        <a href="/" class="ui button">返回首页</a>
+    <div class="ui container main-container" id="main-content" style="display: none;">
+        <div class="ui secondary pointing tabular menu">
+            <a class="item active" data-tab="left"><i class="columns icon"></i> 左侧栏</a>
+            <a class="item" data-tab="right"><i class="columns icon"></i> 右侧栏</a>
+        </div>
+        
+        <div class="ui tab active" data-tab="left" id="left-container"></div>
+        <div class="ui tab" data-tab="right" id="right-container"></div>
+    </div>
+
+    <div class="action-bar" id="action-bar" style="display: none;">
+        <button class="ui primary button large" id="save-btn">
+            <i class="save icon"></i> 保存所有修改
+        </button>
     </div>
 
     <div class="ui modal" id="login-modal">
@@ -76,8 +204,14 @@
         }
 
         function showMain() {
-            $('#main-content').show();
+            $('#main-content').fadeIn();
+            $('#action-bar').fadeIn();
             loadData();
+        }
+
+        function logout() {
+            localStorage.removeItem('nav_auth_token');
+            location.reload();
         }
 
         function handleLogin() {
@@ -117,19 +251,21 @@
             items.forEach((category, catIndex) => {
                 const catHtml = `
                     <div class="category-section" data-side="${side}" data-index="${catIndex}">
-                        <div class="ui form">
-                            <div class="field">
-                                <label>分类名称</label>
-                                <div class="ui action input">
-                                    <input type="text" class="cat-name" value="${category.category}">
-                                    <button class="ui red icon button delete-cat-btn"><i class="trash icon"></i></button>
-                                </div>
+                        <div class="category-header">
+                            <div class="ui transparent input fluid big">
+                                <input type="text" class="cat-name" value="${category.category}" placeholder="分类名称">
                             </div>
-                            <div class="field">
-                                <label>链接列表</label>
-                                <div class="links-container"></div>
-                                <button class="ui mini button add-link-btn"><i class="plus icon"></i> 添加链接</button>
-                            </div>
+                            <button class="ui icon button basic circular delete-cat-btn" title="删除分类">
+                                <i class="trash alternate outline icon" style="color: #db2828;"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="links-container"></div>
+                        
+                        <div style="text-align: center; margin-top: 15px;">
+                            <button class="ui mini button basic dashed add-link-btn">
+                                <i class="plus icon"></i> 添加链接
+                            </button>
                         </div>
                     </div>
                 `;
@@ -140,9 +276,11 @@
                     const linkHtml = `
                         <div class="link-item">
                             <i class="bars icon handle"></i>
-                            <div class="ui input"><input type="text" class="link-name" placeholder="名称" value="${link.name}"></div>
-                            <div class="ui input"><input type="text" class="link-url" placeholder="URL" value="${link.url}"></div>
-                            <button class="ui icon button red basic delete-link-btn"><i class="minus icon"></i></button>
+                            <div class="ui input transparent"><input type="text" class="link-name" placeholder="网站名称" value="${link.name}"></div>
+                            <div class="ui input transparent fluid"><input type="text" class="link-url" placeholder="https://" value="${link.url}"></div>
+                            <button class="ui icon button basic circular delete-link-btn" title="删除链接">
+                                <i class="times icon" style="color: #999;"></i>
+                            </button>
                         </div>
                     `;
                     $linksContainer.append(linkHtml);
@@ -151,38 +289,47 @@
                 // Initialize Sortable for links
                 new Sortable($linksContainer[0], {
                     handle: '.handle',
-                    animation: 150
+                    animation: 150,
+                    ghostClass: 'blue-background-class'
                 });
 
                 container.append($cat);
             });
 
-            container.append(`<button class="ui button green add-cat-btn" data-side="${side}"><i class="plus icon"></i> 添加分类</button>`);
+            const addBtnHtml = `
+                <div class="add-cat-btn-container add-cat-btn" data-side="${side}">
+                    <i class="plus circle icon big"></i>
+                    <div style="margin-top: 10px; font-weight: 600;">添加新分类</div>
+                </div>
+            `;
+            container.append(addBtnHtml);
             
             bindEvents(container);
         }
 
         function bindEvents(container) {
             container.find('.delete-cat-btn').click(function() {
-                if(confirm('确定删除该分类吗？')) {
-                    $(this).closest('.category-section').remove();
+                if(confirm('确定删除该分类及其所有链接吗？')) {
+                    $(this).closest('.category-section').slideUp(200, function() { $(this).remove(); });
                 }
             });
 
             container.find('.add-link-btn').click(function() {
                 const linkHtml = `
-                    <div class="link-item">
+                    <div class="link-item" style="display:none">
                         <i class="bars icon handle"></i>
-                        <div class="ui input"><input type="text" class="link-name" placeholder="名称"></div>
-                        <div class="ui input"><input type="text" class="link-url" placeholder="URL"></div>
-                        <button class="ui icon button red basic delete-link-btn"><i class="minus icon"></i></button>
+                        <div class="ui input transparent"><input type="text" class="link-name" placeholder="网站名称"></div>
+                        <div class="ui input transparent fluid"><input type="text" class="link-url" placeholder="https://"></div>
+                        <button class="ui icon button basic circular delete-link-btn"><i class="times icon" style="color: #999;"></i></button>
                     </div>
                 `;
-                $(this).prev('.links-container').append(linkHtml);
+                const $newItem = $(linkHtml);
+                $(this).parent().prev('.links-container').append($newItem);
+                $newItem.fadeIn(200);
             });
 
             container.on('click', '.delete-link-btn', function() {
-                $(this).closest('.link-item').remove();
+                $(this).closest('.link-item').fadeOut(200, function() { $(this).remove(); });
             });
 
             container.find('.add-cat-btn').click(function() {
