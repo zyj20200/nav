@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="css/semantic.min.css">
     <script src="js/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <style>
         body { padding: 20px; }
         .category-section { margin-bottom: 30px; border: 1px solid #ddd; padding: 15px; border-radius: 5px; }
         .link-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
         .link-item input { flex: 1; }
+        .link-item .handle { cursor: move; color: #aaa; margin-right: 5px; }
+        .link-item .handle:hover { color: #333; }
     </style>
 </head>
 <body>
@@ -136,12 +139,19 @@
                 category.links.forEach((link, linkIndex) => {
                     const linkHtml = `
                         <div class="link-item">
+                            <i class="bars icon handle"></i>
                             <div class="ui input"><input type="text" class="link-name" placeholder="名称" value="${link.name}"></div>
                             <div class="ui input"><input type="text" class="link-url" placeholder="URL" value="${link.url}"></div>
                             <button class="ui icon button red basic delete-link-btn"><i class="minus icon"></i></button>
                         </div>
                     `;
                     $linksContainer.append(linkHtml);
+                });
+
+                // Initialize Sortable for links
+                new Sortable($linksContainer[0], {
+                    handle: '.handle',
+                    animation: 150
                 });
 
                 container.append($cat);
@@ -162,6 +172,7 @@
             container.find('.add-link-btn').click(function() {
                 const linkHtml = `
                     <div class="link-item">
+                        <i class="bars icon handle"></i>
                         <div class="ui input"><input type="text" class="link-name" placeholder="名称"></div>
                         <div class="ui input"><input type="text" class="link-url" placeholder="URL"></div>
                         <button class="ui icon button red basic delete-link-btn"><i class="minus icon"></i></button>
