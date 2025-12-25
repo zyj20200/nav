@@ -44,30 +44,50 @@
 
         .link-item { 
             display: flex; 
-            gap: 12px; 
-            margin-bottom: 12px; 
+            gap: 15px; 
+            margin-bottom: 15px; 
             align-items: center; 
-            background: #f9f9f9;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid transparent;
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
             transition: all 0.2s;
         }
         .link-item:hover {
-            background: white;
-            border-color: #e0e0e0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            border-color: #b5d0eb;
+            box-shadow: 0 4px 10px rgba(33, 133, 208, 0.1);
+            transform: translateY(-1px);
         }
-        .link-item input { flex: 1; border: 1px solid #ddd !important; border-radius: 6px !important; }
-        .link-item input:focus { border-color: #2185d0 !important; }
+        
+        /* 修复输入框显示问题，并美化 */
+        .link-item .ui.input {
+            border-radius: 500rem; /* 圆角 */
+        }
+        .link-item .ui.input input { 
+            background-color: #f5f7fa !important; 
+            border: 1px solid transparent !important;
+            transition: all 0.2s;
+        }
+        .link-item .ui.input input:focus { 
+            background-color: #fff !important; 
+            border-color: #2185d0 !important; 
+            box-shadow: 0 0 0 2px rgba(33, 133, 208, 0.1) !important;
+        }
+        
+        /* 名称输入框固定宽度 */
+        .link-name-wrapper { flex: 0 0 25%; min-width: 150px; }
+        /* URL 输入框占据剩余空间 */
+        .link-url-wrapper { flex: 1; }
         
         .link-item .handle { 
             cursor: grab; 
-            color: #bbb; 
-            padding: 5px;
+            color: #cbd5e0; 
+            padding: 8px;
+            font-size: 1.1em;
             transition: color 0.2s;
         }
-        .link-item .handle:hover { color: #666; }
+        .link-item .handle:hover { color: #2185d0; }
         .link-item .handle:active { cursor: grabbing; }
 
         .ui.tabular.menu { border-bottom: none; margin-bottom: 20px; }
@@ -275,11 +295,20 @@
                 category.links.forEach((link, linkIndex) => {
                     const linkHtml = `
                         <div class="link-item">
-                            <i class="bars icon handle"></i>
-                            <div class="ui input transparent"><input type="text" class="link-name" placeholder="网站名称" value="${link.name}"></div>
-                            <div class="ui input transparent fluid"><input type="text" class="link-url" placeholder="https://" value="${link.url}"></div>
-                            <button class="ui icon button basic circular delete-link-btn" title="删除链接">
-                                <i class="times icon" style="color: #999;"></i>
+                            <i class="bars icon handle" title="拖动排序"></i>
+                            
+                            <div class="ui input icon link-name-wrapper">
+                                <input type="text" class="link-name" placeholder="网站名称" value="${link.name}">
+                                <i class="tag icon" style="opacity: 0.3;"></i>
+                            </div>
+                            
+                            <div class="ui input icon fluid link-url-wrapper">
+                                <input type="text" class="link-url" placeholder="https://example.com" value="${link.url}">
+                                <i class="linkify icon" style="opacity: 0.3;"></i>
+                            </div>
+                            
+                            <button class="ui icon button basic circular delete-link-btn" title="删除链接" style="box-shadow: none !important;">
+                                <i class="trash alternate outline icon" style="color: #db2828;"></i>
                             </button>
                         </div>
                     `;
@@ -317,10 +346,21 @@
             container.find('.add-link-btn').click(function() {
                 const linkHtml = `
                     <div class="link-item" style="display:none">
-                        <i class="bars icon handle"></i>
-                        <div class="ui input transparent"><input type="text" class="link-name" placeholder="网站名称"></div>
-                        <div class="ui input transparent fluid"><input type="text" class="link-url" placeholder="https://"></div>
-                        <button class="ui icon button basic circular delete-link-btn"><i class="times icon" style="color: #999;"></i></button>
+                        <i class="bars icon handle" title="拖动排序"></i>
+                        
+                        <div class="ui input icon link-name-wrapper">
+                            <input type="text" class="link-name" placeholder="网站名称">
+                            <i class="tag icon" style="opacity: 0.3;"></i>
+                        </div>
+                        
+                        <div class="ui input icon fluid link-url-wrapper">
+                            <input type="text" class="link-url" placeholder="https://example.com">
+                            <i class="linkify icon" style="opacity: 0.3;"></i>
+                        </div>
+                        
+                        <button class="ui icon button basic circular delete-link-btn" title="删除链接" style="box-shadow: none !important;">
+                            <i class="trash alternate outline icon" style="color: #db2828;"></i>
+                        </button>
                     </div>
                 `;
                 const $newItem = $(linkHtml);
